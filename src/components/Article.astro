@@ -1,0 +1,41 @@
+---
+import { dateFilter } from "../lib/dateFilter";
+const { article, lazy } = Astro.props;
+
+const isCDNImage = article.image?.indexOf("http") === 0;
+---
+
+<article
+  class="relative flex justify-between px-4 py-4 border-b border-gray-200 group md:border-0 dark:border-slate-700 md:flex-col-reverse"
+>
+  <a
+    href={article?.url}
+    title={article?.title}
+    aria-label={article?.title}
+    class="absolute inset-0 z-10 w-full h-full"
+  >
+  </a>
+  <div class="flex flex-col flex-1">
+    <h3
+      class="flex-1 mb-2 text-xl font-medium leading-6 transition-colors ease-in-out dark:text-white group-hover:text-barbie"
+      set:html={article?.title}
+    >
+    </h3>
+    <p
+      class="flex flex-wrap items-center text-sm text-gray-500 dark:text-gray-400"
+    >
+      {dateFilter(article.date)}
+    </p>
+  </div>
+  <div>
+    <img
+      class="object-cover w-full h-full transition-opacity rounded-lg drop-shadow group-hover:opacity-90"
+      src={`${article?.image}${isCDNImage ? "/d" : ""}` ??
+        "/images/fallback.png"}
+      width="368"
+      height="193"
+      alt={article?.title}
+      loading={lazy ? "lazy" : "eager"}
+    />
+  </div>
+</article>
