@@ -1,0 +1,141 @@
+---
+import Logo from "../components/Logo.astro";
+import "../assets/styles/global.css";
+
+const { title, description, image, post, date } = Astro.props;
+
+const useImage = image ?? "../../public/images-fallback/fallback.png";
+const fullImage = `https://daily-dev-tips.com${useImage}`;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <title set:html={title}></title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <!-- TODO: replace below with own domain -->
+    <link
+      rel="webmention"
+      href="https://webmention.io/<OWN_DOMAIN>/webmention"
+    />
+    <link rel="pingback" href="https://webmention.io/<OWN_DOMAIN>/xmlrpc"
+    />
+    <meta property="og:site_name" content="BLOG_NAME" />
+    <meta property="og:title" content={title} />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalURL.href} />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta property="twitter:domain" content="daily-dev-tips.com" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:creator" content="@Sebastian" />
+    <meta property="twitter:url" content={canonicalURL.href} />
+    {description && (
+    <meta name="description" content={description} />
+    <meta name="twitter:description" content={description} />
+    <meta property="og:description" content={description} />
+    )}
+    <meta property="og:image" content={fullImage} />
+    <meta name="twitter:image" content={fullImage} />
+    <meta property="og:image:alt" content="Page image Sebi's blog" />
+    <meta name="twitter:image:alt" content="Page image for Sebi's blog" />
+    <!-- TODO: replace image urls  -->
+    {post && (
+      <script
+        type='application/ld+json'
+        set:html={`{
+                                                             "@context": "https://schema.org",
+                                                             "@type": "NewsArticle",
+                                                             "headline": "${title}",
+                                                             "datePublished": "${date}",
+                                                             "dateModified": "${date}",
+                                                             "image": "https://daily-dev-tips.com/images/logo.png",
+                                                             "author": {
+                                                               "@type": "Person",
+                                                               "name": "Sebastian Miga"
+                                                             },
+                                                              "publisher": {
+                                                               "@type": "Organization",
+                                                               "name": "Daily Dev Tips",
+                                                               "logo": {
+                                                                 "@type": "ImageObject",
+                                                                 "url": "https://daily-dev-tips.com/images/logo.png"
+                                                               }
+                                                             },
+                                                             "description": "${description}"
+                                                           }`}
+      ></script>
+    )}
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+    <link rel="manifest" href="/site.webmanifest" />
+    <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+    <meta name="msapplication-TileColor" content="#da532c" />
+    <meta name="theme-color" content="#ffffff" />
+  </head>
+  <body class="flex flex-col min-h-screen font-sans bg-indigo-50 dark:bg-slate-900">
+    <header
+      class="h-[60px] flex items-center justify-between container mx-auto px-4 md:px-0"
+    >
+      <Logo />      
+    </header>
+    <main class="flex-1 px-4">
+      <slot />
+    </main>
+    <div class="text-dark">
+      <svg
+        viewBox="0 -20 700 110"
+        width="100%"
+        height="110"
+        preserveAspectRatio="none"
+      >
+        <path
+          d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z"
+          fill="currentColor"></path>
+      </svg>
+    </div>
+    <footer class="grid text-white bg-dark place-items-center">
+      <div class="flex flex-col items-center gap-4 mb-4 md:flex-row md:gap-0">
+        <Logo />
+        <strong class="ml-3 text-xl">Sebi's Blog</strong>
+      </div>
+      <nav class="my-8" aria-label="Footer">
+        <ul class="flex">
+          <li class="px-1.5">
+            <a
+              class="hover:underline decoration-barbie underline-offset-2"
+              href="/about/">About</a
+            >
+          </li>
+          <li class="px-1.5">
+            <a
+              class="hover:underline decoration-barbie underline-offset-2"
+              href="https://github.com/msebi"
+              target="_blank"
+              rel="noopener nofollow">GitHub</a
+            >
+          </li>
+          <!-- TODO: enable later on side projects -->
+          <!-- <li class="px-1.5">
+            <a
+              class="hover:underline decoration-barbie underline-offset-2"
+              href="https://codepen.io/<usr name goes here>"
+              target="_blank"
+              rel="noopener nofollow">CodePen</a
+            >
+          </li> -->
+          <li class="px-1.5">
+            <a
+              class="u-url hover:underline decoration-barbie underline-offset-2"
+              href="https://twitter.com/_Basti_MD_"
+              target="_blank"
+              rel="noopener nofollow me">Twitter</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </footer>
+  </body>
+</html>
