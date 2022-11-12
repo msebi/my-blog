@@ -126,3 +126,7 @@ https://docs.astro.build/en/core-concepts/layouts/
 Art direction problem (pick predefined scale image depending on device in use):
 
 https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+
+TODO:
+
+Questions: how do you get the data type of a post?

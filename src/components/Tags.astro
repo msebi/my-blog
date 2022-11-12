@@ -1,0 +1,32 @@
+---
+import Tag from "../components/Tag.astro";
+import { getAllPosts } from "../lib/posts";
+
+const allPosts = (await getAllPosts()).filter(
+  (a: { date: string }) => new Date(a.date) <= new Date()
+);
+
+const allTags = [
+  ...new Set(
+    allPosts.reduce((prev: string | any[], post: { tags: any }) => {
+      prev = prev.concat(post.tags);
+      return prev;
+    }, [])
+  ),
+];
+
+const { slug } = Astro.params;
+---
+
+<nav class="container mx-auto mb-4" aria-label="Tag">
+  <ul class="flex flex-wrap">
+    <li>
+      <a
+        href="/archive/"
+        class=`${slug === undefined ? 'bg-purple-500 text-white' : 'bg-purple-200'} block p-2 mr-2 mb-2 text-sm rounded-xl font-medium`
+        >All
+      </a>
+    </li>
+    {allTags.map((tag) => <Tag tag={tag} active={slug === tag} />)}
+  </ul>
+</nav>
