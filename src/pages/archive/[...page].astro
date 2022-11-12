@@ -1,0 +1,72 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Article from "../../components/Article.astro";
+import Tags from "../../components/Tags.astro";
+import { getAllPosts } from "../../lib/posts";
+
+// TODO: see property renaming
+// https://www.typescriptlang.org/docs/handbook/variable-declarations.html#property-renaming
+export async function getStaticPaths({ paginate }: { paginate: any }) {
+  const allPosts = (await getAllPosts())
+    .filter(
+      (a: { date: string | number | Date }) => new Date(a.date) <= new Date()
+    )
+    .sort((a: { date: any }, b: { date: string }) =>
+      b.date.localeCompare(a.date)
+    );
+
+  return paginate(allPosts, { pageSize: 10 });
+}
+const { page } = Astro.props;
+---
+
+<BaseLayout
+  title="All archived posts"
+  description="This blog is more of a technical diary of solutions to day to day dev problems"
+>
+  <header class="container mx-auto my-6">
+    <h1 class="mb-8 text-4xl font-extrabold text-gray-900 dark:text-white">
+      Sebi's dev blog
+    </h1>
+
+    <Tags />
+
+    <section
+      class="mb-10 -mx-4 bg-white border-t border-b border-gray-200 dark:bg-dark dark:border-slate-700"
+    >
+      <div class="container md:mx-auto">
+        <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2 md:py-4">
+          {page.data.map((article: any) => <Article article={article} />)}
+        </div>
+      </div>
+      <div class="container mx-auto my-4 text-center">
+        <strong class="dark:text-white"
+          >Page {page.currentPage} / {page.lastPage}
+        </strong>
+        <nav class="nav" aria-label="Pagination">
+          {
+            page.url.prev && (
+              <a
+                class="font-medium text-barbie hover:underline underline-offset-2"
+                href={page.url.prev || "#"}
+              >
+                &larr; Newer
+              </a>
+            )
+          }
+          {page.url.prev && page.url.next && <span class="mx-1">|</span>}
+          {
+            page.url.next && (
+              <a
+                class="font-medium text-barbie hover:underline underline-offset-2"
+                href={page.url.next || "#"}
+              >
+                Older &rarr;
+              </a>
+            )
+          }
+        </nav>
+      </div>
+    </section>
+  </header>
+</BaseLayout>
