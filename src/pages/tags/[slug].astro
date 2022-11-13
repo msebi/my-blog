@@ -1,0 +1,57 @@
+---
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Tags from "../../components/Tags.astro";
+import Article from "../../components/Article.astro";
+import { getAllPosts } from "../../lib/posts.js";
+
+export const getStaticPaths = async () => {
+  const allPosts = (await getAllPosts())
+    .filter((a: { date: string }) => new Date(a.date) <= new Date())
+    .sort((a: { date: any }, b: { date: string }) =>
+      b.date.localeCompare(a.date)
+    );
+
+  const allTags = [
+    ...new Set(
+      allPosts.reduce((prev: string | any[], post: { tags: any }) => {
+        prev = prev.concat(post.tags);
+        return prev;
+      }, [])
+    ),
+  ];
+
+  return allTags.map((tag) => {
+    const postForTag = allPosts.filter((post) => post.tags.includes(tag));
+    return {
+      params: { slig: tag },
+      props: { allTags: postsForTag },
+    };
+  });
+};
+
+const { slug } = Astro.params;
+const { allTags, postsForTag } = Astro.props;
+---
+
+<BaseLayout
+  title={`Tag Archive ${slug}`}
+  description={`This is my dev blog ${slug}`}
+>
+  <header class="container mx-auto my-6">
+    <h1 class="mb-8 text-4xl font-extrabold text-gray-900 dark:text-white">
+      My {slug} dev blog
+    </h1>
+  </header>
+
+  <Tags />
+
+  <section
+    class="mb-10 -mx-4 bg-white border-t border-b border-gray-200 dark:bg-dark dark:border-slate-700"
+  >
+    <div class="container md:mx-auto">
+      <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2 md:py-4">
+        {postsForTag.map((article) => <Article article={article} />)}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
