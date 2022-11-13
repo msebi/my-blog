@@ -1,4 +1,4 @@
-export function dateFilter(value) {
+export const dateFilter = (value) => {
   const dateObject = new Date(value);
 
   const months = [
@@ -20,4 +20,4 @@ export function dateFilter(value) {
   return `${dayWithSuffix} ${
     months[dateObject.getMonth()]
   }, ${dateObject.getFullYear()}`;
-}
+};

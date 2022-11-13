@@ -1,4 +1,4 @@
-async function load() {
+const load = async () => {
   const fetchedPosts = import.meta.glob("../pages/posts/*.md", { eager: true });
 
   const getPost = async (key) => {
@@ -15,12 +15,12 @@ async function load() {
 
   const results = await Promise.all(mappedPosts);
   return results;
-}
+};
 
 let _posts;
 
-export async function getAllPosts() {
+export const getAllPosts = async () => {
   _posts = _posts || load();
 
   return await _posts;
-}
+};

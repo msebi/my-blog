@@ -6,7 +6,7 @@ import { getAllPosts } from "../../lib/posts";
 
 // TODO: see property renaming
 // https://www.typescriptlang.org/docs/handbook/variable-declarations.html#property-renaming
-export async function getStaticPaths({ paginate }: { paginate: any }) {
+export const getStaticPaths = async ({ paginate }: { paginate: any }) => {
   const allPosts = (await getAllPosts())
     .filter(
       (a: { date: string | number | Date }) => new Date(a.date) <= new Date()
@@ -16,7 +16,7 @@ export async function getStaticPaths({ paginate }: { paginate: any }) {
     );
 
   return paginate(allPosts, { pageSize: 10 });
-}
+};
 const { page } = Astro.props;
 ---
 
