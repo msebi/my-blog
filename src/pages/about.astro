@@ -1,0 +1,54 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+---
+
+<BaseLayout
+  title="Who is Chris and what is Daily Dev Tips"
+  description="I'm Sebastian Miga, a freelance web dev interested in anything related to js."
+>
+  <header class="container mx-auto my-6">
+    <h1 class="mb-8 text-4xl font-extrabold text-gray-900 dark:text-white">
+      Sebastian aka Basti
+    </h1>
+  </header>
+
+  <section
+    class="py-8 mb-10 -mx-4 bg-white border-t border-b border-gray-200 dark:bg-dark dark:border-slate-700"
+  >
+    <div class="container md:mx-auto">
+      <article
+        class="mx-4 prose prose-lg md:prose-xl dark:prose-invert md:mx-auto"
+      >
+        <p>
+          I'm Sebastian, a web dev living in Munich with an interest in js and
+          sports. Sometimes, even in reverse engineering.
+        </p>
+
+        <div class="grid grid-cols-1 gap-0 md:grid-cols-4 md:gap-6">
+          <div class="col-span-1">
+            <img
+              src="/assets/about.jpg"
+              class="shadow-lg rounded-xl"
+              alt="About Chris Bongers | Daily Dev Tips"
+            />
+          </div>
+          <div class="col-span-3">
+            <p>
+              Shoot me a message on
+              <!--TODO: replace urls  -->
+              <a href="my domain" target="_blank" rel="noopener noreferrer"
+                >Twitter</a
+              >, <a href="my domain" target="_blank" rel="noopener noreferrer"
+                >LinkedIn</a
+              >, or <a
+                href="my domain"
+                target="_blank"
+                rel="noopener noreferrer">GitHub</a
+              >.
+            </p>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+</BaseLayout>
