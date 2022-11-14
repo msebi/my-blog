@@ -1,83 +1,78 @@
 ---
-import Layout from "../layouts/Layout.astro";
-import Card from "../components/Card.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Article from "../components/Article.astro";
+import { getAllPosts } from "../lib/posts.js";
+
+const allPosts = (await getAllPosts())
+  .filter((a: { date: string }) => new Date(a.date) <= new Date())
+  .sort((a: { date: any }, b: { date: string }) =>
+    b.date.localeCompare(a.date)
+  );
+const latest = allPosts.slice(0, 4);
+const topPost = allPosts.filter((a: { [x: string]: any; a: any }) => a.top);
 ---
 
-<Layout title="Welcome to Astro.">
-  <main>
-    <h1>Welcome to <span class="text-gradient">Astro</span></h1>
-    <p class="instructions">
-      To get started, open the directory <code>src/pages</code> in your project.<br
-      />
-      <strong>Code Challenge:</strong> Tweak the "Welcome to Astro" message above.
+<!-- TODO: give the blog a name; have two domains, one a technical name and the other www.sebastianmiga.com, sebastianmiga.com, sebastianmiga.de -->
+<BaseLayout
+  title="Basti's blog"
+  description="This blog is a collection of solutions to problems in my day to day work"
+  showSubscribe={false}
+>
+  <header class="container mx-auto my-6">
+    <h1 class="mb-8 text-4xl font-extrabold text-gray-900 dark:text-white">
+      Technical diary
+    </h1>
+    <p class="text-xl leading-8 text-gray-600 dark:text-slate-400">
+      Sup! Web dev here with a keen interest in react/node and anything in
+      between.
     </p>
-    <ul role="list" class="link-card-grid">
-      <Card
-        href="https://docs.astro.build/"
-        title="Documentation"
-        body="Learn how Astro works and explore the official API docs."
-      />
-      <Card
-        href="https://astro.build/integrations/"
-        title="Integrations"
-        body="Supercharge your project with new frameworks and libraries."
-      />
-      <Card
-        href="https://astro.build/themes/"
-        title="Themes"
-        body="Explore a galaxy of community-built starter themes."
-      />
-      <Card
-        href="https://astro.build/chat/"
-        title="Community"
-        body="Come say hi to our amazing Discord community. ❤️"
-      />
-      <Card href="./blog" title="Blog" body="This is a blog" />
-    </ul>
-  </main>
-</Layout>
+  </header>
 
-<style>
-  main {
-    margin: auto;
-    padding: 1.5rem;
-    max-width: 60ch;
-  }
-  h1 {
-    font-size: 3rem;
-    font-weight: 800;
-    margin: 0;
-  }
-  .text-gradient {
-    background-image: var(--accent-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-size: 400%;
-    background-position: 0%;
-  }
-  .instructions {
-    line-height: 1.6;
-    margin: 1rem 0;
-    border: 1px solid rgba(var(--accent), 25%);
-    background-color: white;
-    padding: 1rem;
-    border-radius: 0.4rem;
-  }
-  .instructions code {
-    font-size: 0.875em;
-    font-weight: bold;
-    background: rgba(var(--accent), 12%);
-    color: rgb(var(--accent));
-    border-radius: 4px;
-    padding: 0.3em 0.45em;
-  }
-  .instructions strong {
-    color: rgb(var(--accent));
-  }
-  .link-card-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(24ch, 1fr));
-    gap: 1rem;
-    padding: 0;
-  }
-</style>
+  <section
+    class="border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
+  >
+    <div class="container mx-auto">
+      <h2
+        class="mb-2 text-sm tracking-wider text-gray-700 uppercase md:normal-case dark:text-white md:mb-0 md:text-2xl md:font-bold"
+      >
+        My 4 latest articles
+      </h2>
+    </div>
+  </section>
+  <section
+    class="-mx-4 bg-white border-t border-gray-200 dark:border-slate-700 dark:bg-dark md:border-t-0 md:dark:border-slate-700"
+  >
+    <div class="container md:mx-auto">
+      <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2">
+        {latest.map((article) => <Article article={article} />)}
+      </div>
+    </div>
+  </section>
+  <section
+    class="mt-6 border-gray-200 md:mt-0 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:dark:border-slate-700 md:pt-8"
+  >
+    <div class="container mx-auto">
+      <h2
+        class="mb-2 text-sm tracking-wider text-gray-700 uppercase md:normal-case dark:text-white md:mb-0 md:text-2xl md:font-bold"
+      >
+        Some of my all-time favorites
+      </h2>
+    </div>
+  </section>
+  <section
+    class="mb-10 -mx-4 bg-white border-t border-b border-gray-200 dark:border-slate-700 dark:bg-dark md:border-t-0 md:dark:border-slate-700"
+  >
+    <div class="container md:mx-auto">
+      <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2">
+        {topPost.map((article) => <Article article={article} />)}
+      </div>
+    </div>
+    <div class="flex px-4 py-4 text-left md:justify-center">
+      <a
+        href="/archive/"
+        class="font-medium text-barbie hover:underline underline-offset-2"
+        >See all {allPosts.length} articles
+      </a>
+    </div>
+  </section>
+</BaseLayout>
