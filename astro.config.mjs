@@ -10,7 +10,7 @@ export default defineConfig({
       assetsInlineLimit: 0,
     },
   },
-  site: "https://daily-dev-tips.com/",
+  site: "http://localhost:3000/",
   sitemap: false,
   integrations: [
     tailwind({

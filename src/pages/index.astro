@@ -3,13 +3,15 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Article from "../components/Article.astro";
 import { getAllPosts } from "../lib/posts.js";
 
+console.log("IN INDEX");
+
 const allPosts = (await getAllPosts())
   .filter((a: { date: string }) => new Date(a.date) <= new Date())
   .sort((a: { date: any }, b: { date: string }) =>
     b.date.localeCompare(a.date)
   );
 const latest = allPosts.slice(0, 4);
-const topPost = allPosts.filter((a: { [x: string]: any; a: any }) => a.top);
+const topPost = allPosts.filter((a: { top: any }) => a.top);
 ---
 
 <!-- TODO: give the blog a name; have two domains, one a technical name and the other www.sebastianmiga.com, sebastianmiga.com, sebastianmiga.de -->
@@ -44,7 +46,7 @@ const topPost = allPosts.filter((a: { [x: string]: any; a: any }) => a.top);
   >
     <div class="container md:mx-auto">
       <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2">
-        {latest.map((article) => <Article article={article} />)}
+        {latest.map((article: any) => <Article article={article} />)}
       </div>
     </div>
   </section>
@@ -64,7 +66,7 @@ const topPost = allPosts.filter((a: { [x: string]: any; a: any }) => a.top);
   >
     <div class="container md:mx-auto">
       <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2">
-        {topPost.map((article) => <Article article={article} />)}
+        {topPost.map((article: any) => <Article article={article} />)}
       </div>
     </div>
     <div class="flex px-4 py-4 text-left md:justify-center">

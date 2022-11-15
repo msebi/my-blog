@@ -4,6 +4,8 @@ import { getAllPosts } from "../lib/posts.js";
 const { tags, currentPathName } = Astro.props;
 const allPosts = await getAllPosts();
 
+console.log("IN RELATED ARTICLES");
+
 const searchTagsCount = tags.length;
 const mappedTags = allPosts
   .filter(({ url }: { url: string }) => url !== currentPathName)
@@ -37,11 +39,23 @@ const mappedTags = allPosts
   );
 const { all, some, one, none } = mappedTags;
 const output = [...all, ...some, ...one, ...none];
+
+const noOfArticles = output.length;
 ---
 
-<div class="container md:mx-auto">
-  <div class="mx-0 md:-mx-4 grid grid-cols-1 md:grid-cols-2">
-    <Article article={output[0]} lazy />
-    <Article article={output[1]} lazy />
-  </div>
-</div>
+{
+  noOfArticles > 0 ? (
+    <div class="container md:mx-auto">
+      <div class="mx-0 md:-mx-4 grid grid-cols-1 md:grid-cols-2">
+        {output[0] && <Article article={output[0]} lazy />}
+        {output[1] && <Article article={output[1]} lazy />}
+      </div>
+    </div>
+  ) : (
+    <div class="container md:mx-auto">
+      <div class="mx-0 md:-mx-4 grid grid-cols-1 md:grid-cols-2">
+        This is the only article so far 😃
+      </div>
+    </div>
+  )
+}
