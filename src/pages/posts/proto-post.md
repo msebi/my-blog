@@ -22,7 +22,7 @@ Define some hotkeys:
 
 Below should be an embedded image:
 
-![Landscape image](https://w7.pngwing.com/pngs/419/573/png-transparen…le-travel-mountain-atmosphere-cloud-landscape.png)
+![Landscape image](https://1.bp.blogspot.com/-YK_9wUCPEN0/WeZBLDOtd0I/AAAAAAAAIJs/KBzsMy2yt240stJ_J84cCK1MK0LzIDzeQCLcBGAs/s1600/Mandalas-tibetanos-para-pintar-8-1024x1024.jpg)
 
 This should be a list:
 

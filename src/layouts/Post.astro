@@ -1,6 +1,5 @@
 ---
 import BaseLayout from "./BaseLayout.astro";
-import Article from "../components/Article.astro";
 import Tag from "../components/Tag.astro";
 import RelatedArticles from "../components/RelatedArticles.astro";
 import { dateFilter } from "../lib/dateFilter.js";
@@ -8,8 +7,7 @@ import { dateFilter } from "../lib/dateFilter.js";
 const { content } = Astro.props;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const mdURL = canonicalURL.pathname.replace(/\/$/, ".md");
-// TODO: change tmpURL to point to own domain
-// const tmpUrl = `https://daily-dev-tips.com${canonicalURL.pathname}`;
+
 const articleDate = new Date(content.date);
 const isoDate = articleDate.toISOString();
 
