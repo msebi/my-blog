@@ -28,3 +28,10 @@ This should be a list:
 
 - Item 1
 - Item 2
+
+This is some js:
+
+```js
+let a = [1, 2, 3];
+let b = a.map((x) => x ^ 2);
+```

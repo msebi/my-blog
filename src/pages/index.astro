@@ -3,7 +3,7 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Article from "../components/Article.astro";
 import { getAllPosts } from "../lib/posts.js";
 
-console.log("IN INDEX");
+// console.log("IN INDEX");
 
 const allPosts = (await getAllPosts())
   .filter((a: { date: string }) => new Date(a.date) <= new Date())

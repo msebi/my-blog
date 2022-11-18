@@ -4,7 +4,6 @@
   "private": true,
   "scripts": {
     "dev": "astro dev",
-    "collect": "node --experimental-modules scripts/collect.mjs",
     "start": "astro dev",
     "build": "npm run collect && NODE_OPTIONS=--max_old_space_size=4096 astro build",
     "dbuild": "NODE_OPTIONS=--max_old_space_size=4096 DEBUG=vite:* astro build",
