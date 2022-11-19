@@ -14,6 +14,10 @@ module.exports = {
       },
       colors: {
         barbie: "#DA0060",
+        akash: "#668cff",
+        akashDark: "#4d79ff",
+        akashLight: "#b3ccff",
+        akashHover: "#99bbff",
         ken: {
           light: "#55e3f2",
           dark: "#439ca6",

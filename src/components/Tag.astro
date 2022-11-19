@@ -5,7 +5,7 @@ const { tag, active } = Astro.props;
 <li>
   <a
     href=`/tags/${tag}/`
-    class=`${active ? 'bg-purple-500 text-white' : 'bg-purple-200 hover:bg-purple-300 transition-colors'} block p-2 mr-2 mb-2  text-sm rounded-xl font-medium`
+    class=`${active ? 'bg-gradient-to-b from-akash via-akashDark to-akash text-white' : 'bg-akashLight hover:bg-gradient-to-b from-akash via-akashHover to-akash transition-colors'} block p-2 mr-2 mb-2  text-sm rounded-xl font-medium`
   >
     #{tag}
   </a>
