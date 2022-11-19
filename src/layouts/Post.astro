@@ -21,22 +21,19 @@ const isoDate = articleDate.toISOString();
 >
   <header class="container mx-auto my-6 text-center">
     <h1
-      class="inline px-2 text-3xl font-bold text-white break-words bg-purple-600 rounded-md box-decoration-clone"
+      class="inline px-2 text-3xl font-bold text-black break-words"
       set:html={content.title}
     >
     </h1>
+    <h2>sdjadj</h2>
   </header>
 
-  <section
-    class="flex flex-col py-6 mb-6 -mx-4 bg-white border-t border-b border-gray-200 dark:bg-dark dark:border-slate-700 md:pb-10"
-  >
+  <section class="flex flex-col py-6 mb-6 -mx-4 bg-white">
     <div class="container mx-auto">
-      <div
-        class="flex flex-1 py-6 mx-4 my-6 bg-indigo-50 dark:bg-slate-300 rounded-xl"
-      >
+      <div class="flex flex-1 py-6 mx-4">
         <div>
           <strong
-            class="flex flex-wrap items-center font-semibold text-gray-600"
+            class="relative flex justify-between px-4 py-4 font-semibold text-gray-600"
             >{dateFilter(content.date)}
           </strong>
         </div>
