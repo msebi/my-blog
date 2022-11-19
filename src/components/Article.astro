@@ -2,12 +2,6 @@
 import { dateFilter } from "../lib/dateFilter.js";
 const { article, lazy } = Astro.props;
 
-// console.log("my blog in article. article prop: " + JSON.stringify(article));
-
-// console.log("IN ARTICLE");
-// console.log("my blog article.url: " + article.url);
-// console.log("my blog article.image: " + article.image);
-
 const isCDNImage = article.image?.indexOf("http") === 0;
 ---
 
