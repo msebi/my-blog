@@ -4,8 +4,6 @@ import { getAllPosts } from "../lib/posts.js";
 const { tags, currentPathName } = Astro.props;
 const allPosts = await getAllPosts();
 
-// console.log("IN RELATED ARTICLES");
-
 const searchTagsCount = tags.length;
 const mappedTags = allPosts
   .filter(({ url }: { url: string }) => url !== currentPathName)
