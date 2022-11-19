@@ -16,6 +16,10 @@ const allTags = [
 ];
 
 const { slug } = Astro.params;
+
+console.log("IN TAGS");
+console.log("allTags: " + allTags);
+console.log("slug: " + slug);
 ---
 
 <nav class="container mx-auto mb-4" aria-label="Tag">
@@ -23,7 +27,7 @@ const { slug } = Astro.params;
     <li>
       <a
         href="/archive/"
-        class=`${slug === undefined ? 'bg-purple-500 text-white' : 'bg-purple-200'} block p-2 mr-2 mb-2 text-sm rounded-xl font-medium`
+        class=`${slug === undefined ? 'bg-indigo-500 text-white' : 'bg-indigo-200'} block p-2 mr-2 mb-2 text-sm rounded-xl font-medium`
         >All
       </a>
     </li>

@@ -4,12 +4,16 @@ import Tags from "../../components/Tags.astro";
 import Article from "../../components/Article.astro";
 import { getAllPosts } from "../../lib/posts.js";
 
+console.log("IN SLUG");
+
 export const getStaticPaths = async () => {
   const allPosts = (await getAllPosts())
     .filter((a: { date: string }) => new Date(a.date) <= new Date())
     .sort((a: { date: any }, b: { date: string }) =>
       b.date.localeCompare(a.date)
     );
+
+  console.log("allTags: " + JSON.stringify(allPosts));
 
   const allTags = [
     ...new Set(
@@ -20,10 +24,14 @@ export const getStaticPaths = async () => {
     ),
   ];
 
+  console.log("allTags: " + allTags);
+
   return allTags.map((tag) => {
-    const postForTag = allPosts.filter((post) => post.tags.includes(tag));
+    console.log("tag " + tag);
+    console.log("allPosts: " + JSON.stringify(allPosts));
+    const postsForTag = allPosts.filter((post) => post.tags.includes(tag));
     return {
-      params: { slig: tag },
+      params: { slug: tag },
       props: { allTags: postsForTag },
     };
   });
@@ -31,6 +39,12 @@ export const getStaticPaths = async () => {
 
 const { slug } = Astro.params;
 const { allTags, postsForTag } = Astro.props;
+
+console.log("slug: " + slug);
+console.log("allTags " + JSON.stringify(allTags));
+console.log("postsForTag " + JSON.stringify(postsForTag));
+
+console.log("<<< IN SLUG");
 ---
 
 <BaseLayout
