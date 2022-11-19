@@ -2,6 +2,8 @@
 import Tag from "../components/Tag.astro";
 import { getAllPosts } from "../lib/posts";
 
+console.log(">>>IN TAGS");
+
 const allPosts = (await getAllPosts()).filter(
   (a: { date: string }) => new Date(a.date) <= new Date()
 );
@@ -17,9 +19,9 @@ const allTags = [
 
 const { slug } = Astro.params;
 
-console.log("IN TAGS");
 console.log("allTags: " + allTags);
 console.log("slug: " + slug);
+console.log("<<< IN TAGS");
 ---
 
 <nav class="container mx-auto mb-4" aria-label="Tag">

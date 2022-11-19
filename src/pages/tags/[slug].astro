@@ -4,35 +4,41 @@ import Tags from "../../components/Tags.astro";
 import Article from "../../components/Article.astro";
 import { getAllPosts } from "../../lib/posts.js";
 
-console.log("IN SLUG");
+console.log(">>> IN SLUG");
 
 export const getStaticPaths = async () => {
+  console.log("SLUG getStaticPaths()");
   const allPosts = (await getAllPosts())
     .filter((a: { date: string }) => new Date(a.date) <= new Date())
     .sort((a: { date: any }, b: { date: string }) =>
       b.date.localeCompare(a.date)
     );
 
-  console.log("allTags: " + JSON.stringify(allPosts));
+  console.log("allPosts: " + JSON.stringify(allPosts) + "\n\n");
 
   const allTags = [
     ...new Set(
-      allPosts.reduce((prev: string | any[], post: { tags: any }) => {
+      allPosts.reduce((prev: any[], post: { tags: string[] }) => {
         prev = prev.concat(post.tags);
         return prev;
       }, [])
     ),
   ];
 
-  console.log("allTags: " + allTags);
+  console.log("allTags: " + allTags + "\n\n");
 
   return allTags.map((tag) => {
-    console.log("tag " + tag);
-    console.log("allPosts: " + JSON.stringify(allPosts));
-    const postsForTag = allPosts.filter((post) => post.tags.includes(tag));
+    const postsForTag = allPosts.filter((post: { tags: unknown[] }) =>
+      post.tags.includes(tag)
+    );
+    console.log("tag " + tag + "\n\n");
+    console.log("allPosts: " + JSON.stringify(allPosts) + "\n\n");
+    console.log(
+      "postsForTag [" + tag + "]: " + JSON.stringify(postsForTag) + "\n\n"
+    );
     return {
       params: { slug: tag },
-      props: { allTags: postsForTag },
+      props: { allTags, postsForTag },
     };
   });
 };
@@ -64,7 +70,13 @@ console.log("<<< IN SLUG");
   >
     <div class="container md:mx-auto">
       <div class="grid grid-cols-1 mx-0 md:-mx-4 md:grid-cols-2 md:py-4">
-        {postsForTag.map((article) => <Article article={article} />)}
+        {
+          postsForTag ? (
+            postsForTag.map((article: any) => <Article article={article} />)
+          ) : (
+            <b>Failed to fetch posts for tag!</b>
+          )
+        }
       </div>
     </div>
   </section>

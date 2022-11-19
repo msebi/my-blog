@@ -6,11 +6,12 @@ import { getAllPosts } from "../../lib/posts";
 
 // TODO: see property renaming
 // https://www.typescriptlang.org/docs/handbook/variable-declarations.html#property-renaming
+
+// TODO: more about getStaticPaths:
+// https://docs.astro.build/en/reference/api-reference/#getstaticpaths
 export const getStaticPaths = async ({ paginate }: { paginate: any }) => {
   const allPosts = (await getAllPosts())
-    .filter(
-      (a: { date: string | number | Date }) => new Date(a.date) <= new Date()
-    )
+    .filter((a: { date: string }) => new Date(a.date) <= new Date())
     .sort((a: { date: any }, b: { date: string }) =>
       b.date.localeCompare(a.date)
     );
