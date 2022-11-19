@@ -22,6 +22,11 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     />
     <link rel="pingback" href="https://webmention.io/<OWN_DOMAIN>/xmlrpc"
     />
+    <!-- Custom fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
     <meta property="og:site_name" content="BLOG_NAME" />
     <meta property="og:title" content={title} />
     <meta property="og:type" content="website" />
@@ -75,7 +80,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <meta name="msapplication-TileColor" content="#da532c" />
     <meta name="theme-color" content="#ffffff" />
   </head>
-  <body class="flex flex-col min-h-screen font-sans dark:bg-slate-900">
+  <body class="flex flex-col min-h-screen font-bevietnampro dark:bg-slate-900">
     <header
       class="h-[60px] flex items-center justify-between container mx-auto px-4 md:px-0"
     >

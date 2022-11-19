@@ -8,6 +8,10 @@ module.exports = {
         xl: "768px",
       },
     },
+    fontFamily: {
+      bevietnampro: ["Be Vietnam Pro", "sans-serif"],
+      roboto: ["Roboto", "sans-serif"],
+    },
     extend: {
       aspectRatio: {
         19: "1.91",
