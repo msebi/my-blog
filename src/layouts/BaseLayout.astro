@@ -25,8 +25,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- Custom fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:ital,wght@0,300;0,400;1,300;1,400&family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;1,300;1,400&display=swap" rel="stylesheet">
     <meta property="og:site_name" content="BLOG_NAME" />
     <meta property="og:title" content={title} />
     <meta property="og:type" content="website" />
@@ -89,8 +89,41 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <main class="flex-1 px-4">
       <slot />
     </main>
-    <div class="text-dark">
-      <svg
+    <div class="text-slate-600">
+      <svg xmlns="http://www.w3.org/2000/svg"
+     xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="600" height="400">
+  <defs>
+    <path id="lev0" fill="text-slate-600" d="M0 0,2 0,1 1.732 z" />
+    <g id="lev1">
+      <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  0  0)" />
+      <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  1  0)" />
+      <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+    </g>
+    <g id="lev2">
+      <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  0  0)" />
+      <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  1  0)" />
+      <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+    </g>
+    <g id="lev3">
+      <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  0  0)" />
+      <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  1  0)" />
+      <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+    </g>
+    <g id="lev4">
+      <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  0  0)" />
+      <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  1  0)" />
+      <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+    </g>
+    <g id="lev5">
+      <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  0  0)" />
+      <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  1  0)" />
+      <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+    </g>
+  </defs>
+  <use xlink:href="#lev5" transform="translate(50,50) scale(200)" />
+</svg>
+      <!-- <svg
         viewBox="0 -20 700 110"
         width="100%"
         height="110"
@@ -99,7 +132,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
         <path
           d="M0,10 c80,-18 230,-12 350,7 c80,13 260,17 350,-5 v100 h-700z"
           fill="currentColor"></path>
-      </svg>
+      </svg> -->
     </div>
     <footer class="grid text-white bg-dark place-items-center">
       <div class="flex flex-col items-center gap-4 mb-4 md:flex-row md:gap-0">
