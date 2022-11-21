@@ -91,38 +91,46 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     </main>
     <div class="text-slate-600">
       <svg xmlns="http://www.w3.org/2000/svg"
-     xmlns:xlink="http://www.w3.org/1999/xlink"
-     width="600" height="400">
-  <defs>
-    <path id="lev0" fill="text-slate-600" d="M0 0,2 0,1 1.732 z" />
-    <g id="lev1">
-      <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  0  0)" />
-      <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  1  0)" />
-      <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
-    </g>
-    <g id="lev2">
-      <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  0  0)" />
-      <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  1  0)" />
-      <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
-    </g>
-    <g id="lev3">
-      <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  0  0)" />
-      <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  1  0)" />
-      <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
-    </g>
-    <g id="lev4">
-      <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  0  0)" />
-      <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  1  0)" />
-      <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
-    </g>
-    <g id="lev5">
-      <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  0  0)" />
-      <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  1  0)" />
-      <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
-    </g>
-  </defs>
-  <use xlink:href="#lev5" transform="translate(50,50) scale(200)" />
-</svg>
+        xmlns:xlink="http://www.w3.org/1999/xlink"
+        width="250" height="200">
+      <defs>
+        <path id="lev0" fill="text-slate-600" d="M0 0,2 0,1 1.732 z" />
+        <g id="lev1">
+          <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  0  0)" />
+          <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  1  0)" />
+          <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+        </g>
+        <g id="lev2">
+          <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  0  0)" />
+          <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  1  0)" />
+          <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+        </g>
+        <g id="lev3">
+          <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  0  0)" />
+          <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  1  0)" />
+          <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+        </g>
+        <g id="lev4">
+          <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  0  0)" />
+          <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  1  0)" />
+          <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+        </g>
+        <g id="lev5">
+          <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  0  0)" />
+          <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  1  0)" />
+          <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+        </g>
+        <g id="end">
+          <use  xlink:href="#lev5" transform="translate(50,50) scale(60)" />
+        </g>
+        <g id="end-180">
+          <!-- <use  xlink:href="#end" transform="translate(100, 0) rotate(0)" /> -->
+          <use  xlink:href="#end" transform="translate(300, 210) rotate(180)" />
+        </g>
+      </defs>
+      <use xlink:href="#end" />
+      <use xlink:href="#end-180" />
+    </svg>
       <!-- <svg
         viewBox="0 -20 700 110"
         width="100%"
