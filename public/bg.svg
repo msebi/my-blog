@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="250" height="200">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="220" height="170">
     <defs>
       <path id="lev0" fill="text-slate-600" d="M0 0,2 0,1 1.732 z" />
       <g id="lev1">
@@ -27,7 +27,7 @@
         <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
       </g>
       <g id="end">
-        <use xlink:href="#lev5" transform="translate(50,50) scale(60)" />
+        <use xlink:href="#lev5" transform="translate(50,50) scale(50)" />
       </g>
       <g id="end-180">
         <!-- <use  xlink:href="#end" transform="translate(100, 0) rotate(0)" /> -->
@@ -38,7 +38,7 @@
         <use xlink:href="#end-180" />
       </g>
       <g id="end-group-centered">
-        <use xlink:href="#end-group" transform="translate(-20, 10)" />        
+        <use xlink:href="#end-group" transform="translate(-50, -50)" />        
       </g>
     </defs>
     <use xlink:href="#end-group-centered" />
