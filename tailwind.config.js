@@ -31,6 +31,9 @@ module.exports = {
         },
         dark: "#061019",
       },
+      backgroundImage: {
+        "footer-sierpinski": "url('/bg.svg')",
+      },
       typography: (theme) => ({
         DEFAULT: {
           css: {
