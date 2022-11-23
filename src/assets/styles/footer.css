@@ -1,3 +1,7 @@
+/* You could use a separate element to layer the second image on top. We offset the left and right by half the width of the background image so that it does not clip on the edges:
+
+The width math sets the element to 0 when the space available - 200px is less than 100px to avoid the overlap when the parent and the ::before have only one image repeat (remove the width and max-width and make the viewport quite narrow to see this for yourself). */
+
 .sierpinski-footer-bg {
   height: 14rem;
   position: relative;
