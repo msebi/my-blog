@@ -32,7 +32,9 @@ module.exports = {
         dark: "#061019",
       },
       backgroundImage: {
-        "footer-sierpinski": "url('/bg.svg')",
+        "footer-sierpinski": "url('/bg-default.svg'), url('/bg-inverted.svg')",
+        "footer-sierpinski-default": "url('/bg-default.svg')",
+        "footer-sierpinski-inverted": "url('/bg-inverted.svg')",
       },
       typography: (theme) => ({
         DEFAULT: {

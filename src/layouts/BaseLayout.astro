@@ -90,8 +90,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
 
-    <div class="h-32  bg-repeat-round bg-footer-sierpinski">
- 
+    <div class="h-32 px-6" style="background-image: url(/bg-default.svg), url(/bg-inverted.svg);background-position: 0% 0%, 5% 0%; background-repeat: space, space;">
+      <!-- <div class="grid grid-cols-2">
+        <div class="h-32 bg-repeat-round bg-footer-sierpinski-default"></div>
+        <div class="h-32 bg-repeat-round bg-footer-sierpinski-inverted"></div>
+      </div> -->
+      <!-- <div class="h-32 bg-repeat-round bg-[url('/bg-default.svg'),_url('/bg-inverted.svg')] bg-[left,_right]"></div> -->
+      
     </div>
     <footer class="grid text-white bg-dark place-items-center">
       <div class="flex flex-col items-center gap-4 mb-4 md:flex-row md:gap-0">
