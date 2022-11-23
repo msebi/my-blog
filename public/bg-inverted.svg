@@ -26,20 +26,12 @@
         <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  1  0)" />
         <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
       </g>
+      <g id="inverted">
+        <use xlink:href="#lev5" transform="matrix(1 0 0 -1  0  1.5)" />
+      </g>
       <g id="end">
-        <use xlink:href="#lev5" transform="translate(50,50) scale(62)" />
-      </g>
-      <g id="end-180">
-        <!-- <use  xlink:href="#end" transform="translate(100, 0) rotate(0)" /> -->
-        <use xlink:href="#end" transform="translate(300, 210) rotate(180)" />
-      </g>
-      <g id="end-group">
-        <use xlink:href="#end" />
-        <use xlink:href="#end-180" />
-      </g>
-      <g id="end-group-centered">
-        <use xlink:href="#end-group" transform="translate(-50, -50)" />        
+        <use xlink:href="#inverted" transform="translate(50,50) scale(50)" />
       </g>
     </defs>
-    <use xlink:href="#end-group-centered" />
+    <use xlink:href="#end" />
   </svg>
