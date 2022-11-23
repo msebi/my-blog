@@ -1,6 +1,7 @@
 ---
 import Logo from "../components/Logo.astro";
 import "../assets/styles/global.css";
+import "../assets/styles/footer.css"
 
 const { title, description, image, post, date } = Astro.props;
 
@@ -20,6 +21,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       rel="webmention"
       href="https://webmention.io/<OWN_DOMAIN>/webmention"
     />
+    <!-- TODO: add own domain -->
     <link rel="pingback" href="https://webmention.io/<OWN_DOMAIN>/xmlrpc"
     />
     <!-- Custom fonts -->
@@ -90,7 +92,34 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
       <slot />
     </main>
 
-    <div class="h-32 px-6" style="background-image: url(/bg-default.svg), url(/bg-inverted.svg);background-position: 0% 0%, 5% 0%; background-repeat: space, space;">
+    <!-- 
+      You could use a separate element to layer the second image on top. We offset the left and right by half the width of the background image so that it does not clip on the edges:
+
+      The width math sets the element to 0 when the space available - 200px is less than 100px to avoid the overlap when the parent and the ::before have only one image repeat (remove the width and max-width and make the viewport quite narrow to see this for yourself).
+
+      .custom-bg {
+      height: 14rem;
+      position: relative;
+      background-image: url("/bg-default.svg");
+      background-position: left;
+      background-repeat: round;
+    }
+    
+    .custom-bg::before {
+      position: absolute;
+      top: 0;
+      left: 100px;
+      width: calc(clamp(0px, 100% - 300px, 1px) * 9999);
+      max-width: calc(100% - 200px);
+      bottom: 0;
+      background-image: url("/bg-inverted.svg");
+      background-position: left;
+      background-repeat: round;
+      content: "";
+    } -->
+    
+
+    <div class="h-32 px-6 sierpinski-footer-bg">
       <!-- <div class="grid grid-cols-2">
         <div class="h-32 bg-repeat-round bg-footer-sierpinski-default"></div>
         <div class="h-32 bg-repeat-round bg-footer-sierpinski-inverted"></div>

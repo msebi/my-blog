@@ -1,0 +1,20 @@
+.sierpinski-footer-bg {
+  height: 14rem;
+  position: relative;
+  background-image: url("/bg-default.svg");
+  background-position: left;
+  background-repeat: round;
+}
+
+.sierpinski-footer-bg::before {
+  position: absolute;
+  top: 0;
+  left: 100px;
+  width: calc(clamp(0px, 100% - 300px, 1px) * 9999);
+  max-width: calc(100% - 200px);
+  bottom: 0;
+  background-image: url("/bg-inverted.svg");
+  background-position: left;
+  background-repeat: round;
+  content: "";
+}
