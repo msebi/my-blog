@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="170">
     <defs>
-      <path id="lev0" fill="text-slate-600" d="M0 0,2 0,1 1.732 z" />
+      <path fill="#4d79ff" id="lev0" d="M0 0,2 0,1 1.732 z" />
       <g id="lev1">
         <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  0  0)" />
         <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  1  0)" />
