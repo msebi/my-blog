@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="200" height="170">
+    <defs>
+      
+      <path fill="#4d79ff" id="lev0" d="M0 0,2 0,1 1.732 z" />
+      <g id="lev1">
+        <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  0  0)" />
+        <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5  1  0)" />
+        <use xlink:href="#lev0" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+      </g>
+      <g id="lev2">
+        <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  0  0)" />
+        <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5  1  0)" />
+        <use xlink:href="#lev1" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+      </g>
+      <g id="lev3">
+        <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  0  0)" />
+        <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5  1  0)" />
+        <use xlink:href="#lev2" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+      </g>
+      <g id="lev4">
+        <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  0  0)" />
+        <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5  1  0)" />
+        <use xlink:href="#lev3" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+      </g>
+      <g id="lev5">
+        <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  0  0)" />
+        <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5  1  0)" />
+        <use xlink:href="#lev4" transform="matrix(0.5 0 0 0.5 0.5 0.866)" />
+      </g>
+      <g id="end">
+        <use xlink:href="#lev5" transform="translate(27,27) scale(70)" />
+      </g>
+    </defs>
+    <use xlink:href="#end" />
+  </svg>
