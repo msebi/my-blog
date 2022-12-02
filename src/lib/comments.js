@@ -5,7 +5,7 @@ exports.handler = async (event) => {
   const issueNumber = event.queryStringParameters.id;
 
   try {
-    const auth = createTokenAuth(process.env.GITHUB_PERSONAL_ACCESS_TOKEN);
+    const auth = createTokenAuth(process.env.GITHUB_COMMENTS_TOKEN);
     const { token } = await auth();
     const octokitClient = new Octokit({ auth: token });
 
