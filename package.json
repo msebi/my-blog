@@ -22,10 +22,13 @@
     "@octokit/rest": "^19.0.5",
     "@tailwindcss/aspect-ratio": "^0.4.0",
     "@tailwindcss/typography": "^0.5.8",
+    "dayjs": "^1.11.6",
+    "markdown-it": "^13.0.1",
     "moment": "^2.29.4",
     "octokit": "^2.0.10",
     "rehype-autolink-headings": "^6.1.1",
     "rehype-slug": "^5.0.1",
+    "sanitize-html": "^2.7.3",
     "twitter-api-client": "^1.6.1"
   }
 }
