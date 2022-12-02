@@ -8,6 +8,8 @@ const { title, description, image, post, date } = Astro.props;
 const useImage = image ?? "../../public/images-fallback/fallback.png";
 const fullImage = `https://daily-dev-tips.com${useImage}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+
+// const comments = (await fetch(`/.netlify/functions_dir/endpoint/?id=123`)).json();
 ---
 
 <!DOCTYPE html>
