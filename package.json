@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "NODE_OPTIONS=--max_old_space_size=4096 astro build",
+    "build": "astro build",
     "dbuild": "NODE_OPTIONS=--max_old_space_size=4096 DEBUG=vite:* astro build",
     "preview": "astro preview",
     "format": "yarn prettier -w ."
