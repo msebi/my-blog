@@ -11,8 +11,8 @@ const mdURL = canonicalURL.pathname.replace(/\/$/, ".md");
 const articleDate = new Date(content.date);
 const isoDate = articleDate.toISOString();
 
-const avatarSize = "20px";
-const metaSpacing = "32px";
+const avatarSize = "32px";
+const metaSpacing = "8px";
 ---
 
 <BaseLayout
@@ -97,7 +97,8 @@ const metaSpacing = "32px";
 
   <style define:vars={{ avatarSize, metaSpacing }}>
     .comment {
-      padding-inline-start: calc(var(--avatarSize) + var(--metaSpacing));
+      --avatar-size: var(--avatarSize);
+      --meta-spacing: var(--metaSpacing);
     }
     .comment-meta {
       display: flex;
@@ -115,6 +116,7 @@ const metaSpacing = "32px";
       border-radius: 50%;
     }
     li {
+      display: list-item;
       text-align: -webkit-match-parent;
     }
   </style>
@@ -122,17 +124,17 @@ const metaSpacing = "32px";
   <section
     class="flex flex-col gap-10 border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
   >
-    <div class="flex flex-col gap-0 container mx-auto">
+    <div class="flex flex-col gap-10 container mx-auto">
       <div class="mt-5 flex flex-wrap content-center gap-0">
-        <div class="text-lg">
+        <div class="text-xl">
           <span id="comments-count" aria-hidden="true">7</span> Comments
         </div>
       </div>
-      <div>
-        <ol class="flex flex-col gap-10">
+      <div class="flex flex-wrap content-center">
+        <ol class="flex flex-col gap-10 text-lg">
           <li>
             <article class="comment flex flex-col gap-0">
-              <header class="comment-meta">
+              <header class="comment-meta mb-4">
                 <img
                   src="https://avatars.githubusercontent.com/u/17982553?v=4"
                   alt=""
