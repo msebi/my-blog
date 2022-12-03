@@ -10,6 +10,9 @@ const mdURL = canonicalURL.pathname.replace(/\/$/, ".md");
 
 const articleDate = new Date(content.date);
 const isoDate = articleDate.toISOString();
+
+const avatarSize = "20px";
+const metaSpacing = "32px";
 ---
 
 <BaseLayout
@@ -25,7 +28,6 @@ const isoDate = articleDate.toISOString();
       set:html={content.title}
     >
     </h1>
-    <h2>sdjadj</h2>
   </header>
 
   <section class="flex flex-col py-6 mb-6 -mx-4 bg-white">
@@ -77,7 +79,7 @@ const isoDate = articleDate.toISOString();
   </section>
 
   <section
-    class="mb-10 -mx-4 bg-white border-t border-b border-gray-200 dark:bg-dark md:border-t-0 dark:border-slate-700"
+    class="mb-4 -mx-4 bg-white border-t border-gray-200 dark:bg-dark md:border-t-0 dark:border-slate-700"
   >
     <div
       class="container flex col-span-1 px-4 py-4 mx-auto md:px-0 md:col-span-2"
@@ -90,6 +92,80 @@ const isoDate = articleDate.toISOString();
           {content.tags.map((tag: string) => <Tag tag={tag} />)}
         </ul>
       </nav>
+    </div>
+  </section>
+
+  <style define:vars={{ avatarSize, metaSpacing }}>
+    .comment {
+      padding-inline-start: calc(var(--avatarSize) + var(--metaSpacing));
+    }
+    .comment-meta {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      row-gap: 8px;
+      column-gap: 8px;
+    }
+    .comment-avatar {
+      align-self: flex-start;
+      width: var(--avatarSize);
+    }
+    .circle {
+      aspect-ratio: 1;
+      border-radius: 50%;
+    }
+    li {
+      text-align: -webkit-match-parent;
+    }
+  </style>
+
+  <section
+    class="flex flex-col gap-10 border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
+  >
+    <div class="flex flex-col gap-0 container mx-auto">
+      <div class="mt-5 flex flex-wrap content-center gap-0">
+        <div class="text-lg">
+          <span id="comments-count" aria-hidden="true">7</span> Comments
+        </div>
+      </div>
+      <div>
+        <ol class="flex flex-col gap-10">
+          <li>
+            <article class="comment flex flex-col gap-0">
+              <header class="comment-meta">
+                <img
+                  src="https://avatars.githubusercontent.com/u/17982553?v=4"
+                  alt=""
+                  aria-hidden="true"
+                  class="comment-avatar circle"
+                />
+                <a
+                  href="https://github.com/AustenLamacraft"
+                  class="font-bold underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  AustenLamacraft
+                </a>
+                <span class="fs-sm">
+                  commented <time datetime="undefined">a year ago</time>
+                </span>
+              </header>
+              <div class="post-comment-body rhythm">
+                <p>
+                  Thanks for this great tutorial! I’m just beginning to work
+                  through it. One typo I just came across is that in <a
+                    href="https://www.aleksandrhovhannisyan.com/blog/static-site-comments-github-issues/#testing-netlify-functions-locally"
+                    target="_blank">Testing Netlify Functions Locally</a
+                  > the flag should be <code>--querystring</code> not <code
+                    >--queryString</code
+                  > i.e. no camel case.
+                </p>
+              </div>
+            </article>
+          </li>
+        </ol>
+      </div>
     </div>
   </section>
 </BaseLayout>
