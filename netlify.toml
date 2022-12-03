@@ -1,2 +1,2 @@
 [functions]
-  directory = "./src/lib"
+  directory = "./src/lib/netlify"
