@@ -125,11 +125,22 @@ const metaSpacing = "8px";
     const thresholds = [0.0];
 
     let boxElement: HTMLElement;
+    let areCommentsLoaded: Boolean = false;
 
     function handleIntersect(entries: any[], observer: any) {
       entries.forEach((entry) => {
-        // Add placeholder text
+        if (!areCommentsLoaded) {
+          console.log(`creating div for ${entry}`);
+          // Add loading text that will be replaced once comments are
+          // fetched from github
+          let div = document.createElement("div");
+          div.innerHTML = "Loading...";
+          div.classList.add("text-xl", "font-bold");
+          document.querySelector("#comments-container-id").appendChild(div);
+        }
       });
+
+      // Fetch comments
     }
 
     function createObserver() {
@@ -169,8 +180,8 @@ const metaSpacing = "8px";
           <span id="comments-count" aria-hidden="true">7</span> Comments
         </div>
       </div>
-      <div class="flex flex-wrap content-center">
-        <ol class="flex flex-col gap-10 text-lg">
+      <div id="comments-container-id" class="flex flex-wrap content-center">
+        <!-- <ol class="flex flex-col gap-10 text-lg">
           <li>
             <article class="comment flex flex-col gap-0">
               <header class="comment-meta mb-4">
@@ -205,7 +216,7 @@ const metaSpacing = "8px";
               </div>
             </article>
           </li>
-        </ol>
+        </ol> -->
       </div>
     </div>
   </section>
