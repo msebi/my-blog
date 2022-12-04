@@ -127,20 +127,111 @@ const metaSpacing = "8px";
     let boxElement: HTMLElement;
     let areCommentsLoaded: Boolean = false;
 
+    const COMMENT_CONTAINER_ID: string = "comments-container-id";
+
+    function createCommentListItemHTMLElement(comment: any) {
+      let liElement = document.createElement("li");
+      
+      let articleElement = document.createElement("article");
+      articleElement.classList.add("comment", "flex", "flex-col", "gap-0");
+      
+      let headerElement = document.createElement("header");
+      headerElement.classList.add("comment-meta", "mb-4");
+
+      let imgElement = document.createElement("img");
+      imgElement.setAttribute("src", comment.avatarUrl);
+      imgElement.setAttribute("alt", `${comment.id}\'s avatar'`);
+      imgElement.setAttribute("aria-hidden", "true");
+      imgElement.setAttribute("src", comment.avatarUrl);
+      imgElement.classList.add("comment-avatar", "circle");
+
+      let anchorElement = document.createElement("a");
+      anchorElement.setAttribute("href", `https://github.com/${comment.name}`);
+      anchorElement.setAttribute("alt", `${comment.id}\'s avatar'`);
+      anchorElement.classList.add("font-bold", "underline");
+      anchorElement.setAttribute("target", "_blank");
+      anchorElement.setAttribute("rel", "noreferrer noopener");
+      
+
+      <li>
+            <article class="comment flex flex-col gap-0">
+              <header class="comment-meta mb-4">
+                <img
+                  src="https://avatars.githubusercontent.com/u/17982553?v=4"
+                  alt=""
+                  aria-hidden="true"
+                  class="comment-avatar circle"
+                />
+                <a
+                  href="https://github.com/AustenLamacraft"
+                  class="font-bold underline"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  AustenLamacraft
+                </a>
+                <span class="fs-sm">
+                  commented <time datetime="undefined">a year ago</time>
+                </span>
+              </header>
+              <div class="post-comment-body rhythm">
+                <p>
+                  Thanks for this great tutorial! I’m just beginning to work
+                  through it. One typo I just came across is that in <a
+                    href="https://www.aleksandrhovhannisyan.com/blog/static-site-comments-github-issues/#testing-netlify-functions-locally"
+                    target="_blank">Testing Netlify Functions Locally</a
+                  > the flag should be <code>--querystring</code> not <code
+                    >--queryString</code
+                  > i.e. no camel case.
+                </p>
+              </div>
+            </article>
+          </li>
+    }
+
+    async function fetchComments(id: string) {
+      const url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
+      let commentsResolved = undefined;
+      try {
+        const comments = (await fetch(url)).json();
+        commentsResolved = JSON.stringify(await comments);
+        console.log(`comments: ${commentsResolved}`);
+      } catch (e) {
+        console.error(e);
+      }
+      return commentsResolved;
+    }
+
     function handleIntersect(entries: any[], observer: any) {
       entries.forEach((entry) => {
         if (!areCommentsLoaded) {
           console.log(`creating div for ${entry}`);
-          // Add loading text that will be replaced once comments are
+          // Add "loading..." text that will be replaced once comments are
           // fetched from github
-          let div = document.createElement("div");
-          div.innerHTML = "Loading...";
-          div.classList.add("text-xl", "font-bold");
-          document.querySelector("#comments-container-id").appendChild(div);
+          let loadingTextElement = document.createElement("div");
+          loadingTextElement.innerHTML = "Loading...";
+          loadingTextElement.classList.add("text-xl", "font-bold");
+
+          document
+            .querySelector(`#${COMMENT_CONTAINER_ID}`)
+            ?.appendChild(loadingTextElement);
         }
       });
 
       // Fetch comments
+      // The id is in the comments section attributes
+      const commentsSection = document.getElementById(COMMENT_CONTAINER_ID);
+      if (commentsSection) {
+        const issueId = commentsSection.getAttribute("issueId");
+        const comments = issueId?  fetchComments(issueId) : {};
+      } else {
+
+      }
+
+      // Now, create the comments list and add it to the page
+      // <ol class="flex flex-col gap-10 text-lg">
+      let commentsList = document.createElement("ol");
+      commentsList.classList.add("flex", "flex-col", "gap-10", "text-lg");
     }
 
     function createObserver() {
@@ -172,6 +263,7 @@ const metaSpacing = "8px";
 
   <section
     id="comments-section-id"
+    issueId={content.issueId}
     class="flex flex-col gap-10 border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
   >
     <div class="flex flex-col gap-10 container mx-auto">
