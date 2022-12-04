@@ -121,7 +121,46 @@ const metaSpacing = "8px";
     }
   </style>
 
+  <script>
+    const thresholds = [0.0];
+
+    let boxElement: HTMLElement;
+
+    function handleIntersect(entries: any[], observer: any) {
+      entries.forEach((entry) => {
+        // Add placeholder text
+      });
+    }
+
+    function createObserver() {
+      let observer;
+
+      let options = {
+        root: null,
+        rootMargin: "0px",
+        threshold: thresholds,
+      };
+
+      observer = new IntersectionObserver(handleIntersect, options);
+      observer.observe(boxElement);
+    }
+
+    // Set things up
+    window.addEventListener(
+      "load",
+      (event) => {
+        boxElement = <HTMLElement>(
+          document.querySelector("#comments-section-id")
+        );
+
+        createObserver();
+      },
+      false
+    );
+  </script>
+
   <section
+    id="comments-section-id"
     class="flex flex-col gap-10 border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
   >
     <div class="flex flex-col gap-10 container mx-auto">
