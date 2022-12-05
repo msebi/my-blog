@@ -58,7 +58,7 @@ const metaSpacing = "8px";
   </section>
 
   <section
-    class="border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
+    class="border-blue-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
   >
     <div class="container mx-auto">
       <h2
@@ -190,12 +190,13 @@ const metaSpacing = "8px";
     function handleIntersect(entries: any[], observer: any) {
       let loadingTextElement;
 
-      alert(
-        `handleIntersect() fired are comments loaded: ${areCommentsLoaded}`
-      );
-
       entries.forEach(async (entry) => {
-        if (!areCommentsLoaded) {
+        // By default handleIntersect() fires on page load. Only
+        // call when comments' section is visible
+        if (!areCommentsLoaded && entry.isIntersecting) {
+          alert(
+            `handleIntersect() fired are comments loaded: ${areCommentsLoaded}. Is intersecting: ${entry.isIntersecting}. n entries: ${entries.length}`
+          );
           console.log(`creating div for ${entry}`);
           // Add "loading..." text that will be replaced once comments are
           // fetched from github
@@ -278,6 +279,10 @@ const metaSpacing = "8px";
       observer.observe(commentsSection);
     }
 
+    // TODO: references
+    // https://codepen.io/jonneal/full/ZELvMvw
+    // https://jasonformat.com/islands-architecture/
+
     // Set things up
     window.addEventListener(
       "load",
@@ -295,7 +300,7 @@ const metaSpacing = "8px";
   <section
     id="comments-section-id"
     issueId={content.issueId}
-    class="flex flex-col gap-10 border-gray-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
+    class="flex flex-col gap-10 border-blue-200 md:bg-white md:dark:bg-dark md:-mx-4 border-top-0 md:border-t md:dark:border-slate-700 md:pt-8"
   >
     <div class="flex flex-col gap-10 container mx-auto">
       <div class="mt-5 flex flex-wrap content-center gap-0">
