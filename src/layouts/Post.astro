@@ -122,7 +122,7 @@ const metaSpacing = "8px";
   </style>
 
   <script>
-    const thresholds = [0.1];
+    const thresholds = [0.0];
 
     let commentsSection: HTMLElement;
     let areCommentsLoaded: Boolean = false;
@@ -190,13 +190,17 @@ const metaSpacing = "8px";
     function handleIntersect(entries: any[], observer: any) {
       let loadingTextElement;
 
+      alert(
+        `handleIntersect() fired are comments loaded: ${areCommentsLoaded}`
+      );
+
       entries.forEach(async (entry) => {
         if (!areCommentsLoaded) {
           console.log(`creating div for ${entry}`);
           // Add "loading..." text that will be replaced once comments are
           // fetched from github
           loadingTextElement = document.createElement("div");
-          loadingTextElement.innerHTML = "Loading...";
+          loadingTextElement.innerHTML = "Loading comments ...";
           loadingTextElement.classList.add("text-xl", "font-bold");
           loadingTextElement.setAttribute("id", LOADING_TEXT_ELEMENT_ID);
           document
