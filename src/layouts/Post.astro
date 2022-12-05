@@ -122,7 +122,7 @@ const metaSpacing = "8px";
   </style>
 
   <script>
-    const thresholds = [0.0];
+    const thresholds = [0.1];
 
     let commentsSection: HTMLElement;
     let areCommentsLoaded: Boolean = false;
@@ -166,7 +166,14 @@ const metaSpacing = "8px";
     }
 
     async function fetchComments(id: string) {
-      const url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
+      let url;
+
+      if (process.env.PROD) {
+        url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
+      } else {
+        url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
+      }
+
       let commentsResolved = undefined;
       try {
         const comments = (await fetch(url)).json();
