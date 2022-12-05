@@ -168,11 +168,11 @@ const metaSpacing = "8px";
     async function fetchComments(id: string) {
       let url;
 
-      if (process.env.PROD) {
-        url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
-      } else {
-        url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
-      }
+      // if (process.env.PROD) {
+      url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
+      // } else {
+      //   url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
+      // }
 
       let commentsResolved = undefined;
       try {
