@@ -127,66 +127,42 @@ const metaSpacing = "8px";
     let boxElement: HTMLElement;
     let areCommentsLoaded: Boolean = false;
 
-    const COMMENT_CONTAINER_ID: string = "comments-container-id";
+    const COMMENTS_CONTAINER_ID: string = "comments-container-id";
+    const COMMENTS_SECTION_ID: string = "comments-section-id";
+    const LOADING_TEXT_ELEMENT_ID: string = "loading-text-id";
+    const ISSUE_ID: string = "issueId";
 
     function createCommentListItemHTMLElement(comment: any) {
       let liElement = document.createElement("li");
-      
-      let articleElement = document.createElement("article");
-      articleElement.classList.add("comment", "flex", "flex-col", "gap-0");
-      
-      let headerElement = document.createElement("header");
-      headerElement.classList.add("comment-meta", "mb-4");
 
-      let imgElement = document.createElement("img");
-      imgElement.setAttribute("src", comment.avatarUrl);
-      imgElement.setAttribute("alt", `${comment.id}\'s avatar'`);
-      imgElement.setAttribute("aria-hidden", "true");
-      imgElement.setAttribute("src", comment.avatarUrl);
-      imgElement.classList.add("comment-avatar", "circle");
-
-      let anchorElement = document.createElement("a");
-      anchorElement.setAttribute("href", `https://github.com/${comment.name}`);
-      anchorElement.setAttribute("alt", `${comment.id}\'s avatar'`);
-      anchorElement.classList.add("font-bold", "underline");
-      anchorElement.setAttribute("target", "_blank");
-      anchorElement.setAttribute("rel", "noreferrer noopener");
-      
-
-      <li>
-            <article class="comment flex flex-col gap-0">
+      // Should be fine since the comment has already been sanitized
+      liElement.innerHTML = `<article class="comment flex flex-col gap-0">
               <header class="comment-meta mb-4">
                 <img
-                  src="https://avatars.githubusercontent.com/u/17982553?v=4"
-                  alt=""
+                  src="${comment.user.avatarUrl}"
+                  alt="${comment.user.name}\'s avatar'"
                   aria-hidden="true"
                   class="comment-avatar circle"
                 />
                 <a
-                  href="https://github.com/AustenLamacraft"
+                  href="https://github.com/${comment.user.name}"
                   class="font-bold underline"
                   target="_blank"
                   rel="noreferrer noopener"
                 >
-                  AustenLamacraft
+                  ${comment.user.name}
                 </a>
                 <span class="fs-sm">
-                  commented <time datetime="undefined">a year ago</time>
+                  commented <time datetime="undefined">${comment.datePosted}</time>
                 </span>
               </header>
               <div class="post-comment-body rhythm">
-                <p>
-                  Thanks for this great tutorial! I’m just beginning to work
-                  through it. One typo I just came across is that in <a
-                    href="https://www.aleksandrhovhannisyan.com/blog/static-site-comments-github-issues/#testing-netlify-functions-locally"
-                    target="_blank">Testing Netlify Functions Locally</a
-                  > the flag should be <code>--querystring</code> not <code
-                    >--queryString</code
-                  > i.e. no camel case.
-                </p>
+                ${comment.body}
               </div>
             </article>
-          </li>
+          `;
+
+      return liElement;
     }
 
     async function fetchComments(id: string) {
@@ -194,7 +170,7 @@ const metaSpacing = "8px";
       let commentsResolved = undefined;
       try {
         const comments = (await fetch(url)).json();
-        commentsResolved = JSON.stringify(await comments);
+        commentsResolved = await comments;
         console.log(`comments: ${commentsResolved}`);
       } catch (e) {
         console.error(e);
@@ -203,35 +179,77 @@ const metaSpacing = "8px";
     }
 
     function handleIntersect(entries: any[], observer: any) {
-      entries.forEach((entry) => {
+      let loadingTextElement;
+
+      entries.forEach(async (entry) => {
         if (!areCommentsLoaded) {
           console.log(`creating div for ${entry}`);
           // Add "loading..." text that will be replaced once comments are
           // fetched from github
-          let loadingTextElement = document.createElement("div");
+          loadingTextElement = document.createElement("div");
           loadingTextElement.innerHTML = "Loading...";
           loadingTextElement.classList.add("text-xl", "font-bold");
-
+          loadingTextElement.setAttribute("id", LOADING_TEXT_ELEMENT_ID);
           document
-            .querySelector(`#${COMMENT_CONTAINER_ID}`)
+            .querySelector(`#${COMMENTS_CONTAINER_ID}`)
             ?.appendChild(loadingTextElement);
+
+          // Fetch comments
+          // The id is in the comments section attributes
+          const commentsSection = document.getElementById(COMMENTS_SECTION_ID);
+
+          console.log(`commentsSection elem: ${commentsSection}`);
+
+          if (commentsSection) {
+            const issueId = commentsSection.getAttribute(ISSUE_ID);
+
+            console.log(`issueId: ${issueId}`);
+
+            const comments = issueId
+              ? await fetchComments(issueId)
+              : { data: [] };
+
+            console.log(`comments: ${JSON.stringify(comments)}`);
+            console.log(`comments.data: ${JSON.stringify(comments.data)}`);
+
+            const nComments = comments.data.length;
+
+            let commentsMeta = document.getElementById("comments-count");
+            if (commentsMeta) {
+              commentsMeta.innerText = `${nComments} Comments`;
+            }
+
+            loadingTextElement = document.getElementById(
+              LOADING_TEXT_ELEMENT_ID
+            );
+
+            if (loadingTextElement) {
+              let parent = loadingTextElement.parentNode;
+
+              // Now, create the comments list and add it to the page
+              // <ol class="flex flex-col gap-10 text-lg">
+              let commentsList = document.createElement("ol");
+              commentsList.classList.add(
+                "flex",
+                "flex-col",
+                "gap-10",
+                "text-lg"
+              );
+
+              for (const comment of comments.data) {
+                console.log(`comment: ${JSON.stringify(comment)}`);
+                let commentElement = createCommentListItemHTMLElement(comment);
+                commentsList.appendChild(commentElement);
+              }
+
+              parent?.insertBefore(commentsList, loadingTextElement);
+              parent?.removeChild(loadingTextElement);
+
+              areCommentsLoaded = true;
+            }
+          }
         }
       });
-
-      // Fetch comments
-      // The id is in the comments section attributes
-      const commentsSection = document.getElementById(COMMENT_CONTAINER_ID);
-      if (commentsSection) {
-        const issueId = commentsSection.getAttribute("issueId");
-        const comments = issueId?  fetchComments(issueId) : {};
-      } else {
-
-      }
-
-      // Now, create the comments list and add it to the page
-      // <ol class="flex flex-col gap-10 text-lg">
-      let commentsList = document.createElement("ol");
-      commentsList.classList.add("flex", "flex-col", "gap-10", "text-lg");
     }
 
     function createObserver() {
@@ -252,7 +270,7 @@ const metaSpacing = "8px";
       "load",
       (event) => {
         boxElement = <HTMLElement>(
-          document.querySelector("#comments-section-id")
+          document.querySelector("#${COMMENTS_SECTION_ID}")
         );
 
         createObserver();
@@ -269,7 +287,7 @@ const metaSpacing = "8px";
     <div class="flex flex-col gap-10 container mx-auto">
       <div class="mt-5 flex flex-wrap content-center gap-0">
         <div class="text-xl">
-          <span id="comments-count" aria-hidden="true">7</span> Comments
+          <span id="comments-count" aria-hidden="true"></span>
         </div>
       </div>
       <div id="comments-container-id" class="flex flex-wrap content-center">
