@@ -95,7 +95,7 @@ const metaSpacing = "8px";
     </div>
   </section>
 
-  <style define:vars={{ avatarSize, metaSpacing }}>
+  <style is:global define:vars={{ avatarSize, metaSpacing }}>
     .comment {
       --avatar-size: var(--avatarSize);
       --meta-spacing: var(--metaSpacing);
@@ -168,11 +168,13 @@ const metaSpacing = "8px";
     async function fetchComments(id: string) {
       let url;
 
-      // if (process.env.PROD) {
-      url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
-      // } else {
-      //   url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
-      // }
+      // See env variable docs here:
+      //  https://docs.astro.build/en/guides/environment-variables/#default-environment-variables
+      if (import.meta.env.PROD) {
+        url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
+      } else {
+        url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
+      }
 
       let commentsResolved = undefined;
       try {
