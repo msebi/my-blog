@@ -9,18 +9,6 @@ const useImage = image ?? "../../public/images-fallback/fallback.png";
 const fullImage = `https://daily-dev-tips.com${useImage}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-// const id = 1;
-// const url = `http://localhost:8888/.netlify/functions/comments?id=${id}`;
-
-// let comments = undefined;
-
-// try {
-//   comments = (await fetch(url)).json();
-//   console.log(`comments: ${JSON.stringify(await comments)}`);  
-// } catch (e) {
-//   console.error(e);
-// }
-
 ---
 
 <!DOCTYPE html>

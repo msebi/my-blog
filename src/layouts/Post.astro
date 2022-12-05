@@ -124,7 +124,7 @@ const metaSpacing = "8px";
   <script>
     const thresholds = [0.0];
 
-    let boxElement: HTMLElement;
+    let commentsSection: HTMLElement;
     let areCommentsLoaded: Boolean = false;
 
     const COMMENTS_CONTAINER_ID: string = "comments-container-id";
@@ -262,15 +262,15 @@ const metaSpacing = "8px";
       };
 
       observer = new IntersectionObserver(handleIntersect, options);
-      observer.observe(boxElement);
+      observer.observe(commentsSection);
     }
 
     // Set things up
     window.addEventListener(
       "load",
       (event) => {
-        boxElement = <HTMLElement>(
-          document.querySelector("#${COMMENTS_SECTION_ID}")
+        commentsSection = <HTMLElement>(
+          document.querySelector(`#${COMMENTS_SECTION_ID}`)
         );
 
         createObserver();
