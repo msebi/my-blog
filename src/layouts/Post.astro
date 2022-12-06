@@ -168,7 +168,7 @@ const metaSpacing = "8px";
     async function fetchComments(id: string) {
       let url;
 
-      // See env variable docs here:
+      // See env variable docs:
       //  https://docs.astro.build/en/guides/environment-variables/#default-environment-variables
       if (import.meta.env.PROD) {
         url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
@@ -194,9 +194,10 @@ const metaSpacing = "8px";
         // By default handleIntersect() fires on page load. Only
         // call when comments' section is visible
         if (!areCommentsLoaded && entry.isIntersecting) {
-          alert(
-            `handleIntersect() fired are comments loaded: ${areCommentsLoaded}. Is intersecting: ${entry.isIntersecting}. n entries: ${entries.length}`
-          );
+          // TODO: remove
+          // alert(
+          //   `handleIntersect() fired are comments loaded: ${areCommentsLoaded}. Is intersecting: ${entry.isIntersecting}. n entries: ${entries.length}`
+          // );
           console.log(`creating div for ${entry}`);
           // Add "loading..." text that will be replaced once comments are
           // fetched from github
