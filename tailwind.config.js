@@ -17,7 +17,6 @@ module.exports = {
         19: "1.91",
       },
       colors: {
-        barbie: "#DA0060",
         akash: "#668cff",
         akashDark: "#4d79ff",
         akashLight: "#b3ccff",
@@ -40,9 +39,9 @@ module.exports = {
             a: {
               transition: "all 0.1s ease-in-out",
               textDecoration: "none",
-              color: theme("colors.barbie"),
+              color: theme("colors.akash"),
               "&:hover": {
-                backgroundColor: theme("colors.barbie"),
+                backgroundColor: theme("colors.akash"),
                 color: "#FFF!important",
               },
             },

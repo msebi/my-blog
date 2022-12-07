@@ -194,11 +194,6 @@ const metaSpacing = "8px";
         // By default handleIntersect() fires on page load. Only
         // call when comments' section is visible
         if (!areCommentsLoaded && entry.isIntersecting) {
-          // TODO: remove
-          // alert(
-          //   `handleIntersect() fired are comments loaded: ${areCommentsLoaded}. Is intersecting: ${entry.isIntersecting}. n entries: ${entries.length}`
-          // );
-          console.log(`creating div for ${entry}`);
           // Add "loading..." text that will be replaced once comments are
           // fetched from github
           loadingTextElement = document.createElement("div");
