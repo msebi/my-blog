@@ -164,6 +164,11 @@ const metaSpacing = "8px";
           `;
 
       // Add prism style to comments
+      const preElements = liElement.querySelectorAll("pre");
+      for (const child of preElements) {
+        console.log(`child: ${child.tagName}`);
+        child.classList.add("language-js");
+      }
       return liElement;
     }
 
