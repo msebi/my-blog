@@ -1,11 +1,12 @@
 ---
 import Logo from "../components/Logo.astro";
 import "../assets/styles/global.css";
-import "../assets/styles/footer.css"
+import "../assets/styles/footer.css";
 
 const { title, description, image, post, date } = Astro.props;
 
 const useImage = image ?? "../../public/images-fallback/fallback.png";
+// TODO: change domain name
 const fullImage = `https://daily-dev-tips.com${useImage}`;
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
@@ -25,6 +26,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <!-- TODO: add own domain -->
     <link rel="pingback" href="https://webmention.io/<OWN_DOMAIN>/xmlrpc"
     />
+    <!-- Syntax highlighting for comments -->
+    <link href="/themes/prism.css" rel="stylesheet" />
     <!-- Custom fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

@@ -121,6 +121,7 @@ const metaSpacing = "8px";
     }
   </style>
 
+  <script is:inline src="/themes/prism.js"></script>
   <script>
     const thresholds = [0.0];
 
@@ -162,6 +163,7 @@ const metaSpacing = "8px";
             </article>
           `;
 
+      // Add prism style to comments
       return liElement;
     }
 
@@ -170,6 +172,7 @@ const metaSpacing = "8px";
 
       // See env variable docs:
       //  https://docs.astro.build/en/guides/environment-variables/#default-environment-variables
+      // TODO: change urls to own domain
       if (import.meta.env.PROD) {
         url = `https://dev--splendorous-tanuki-1181dd.netlify.app/.netlify/functions/comments?id=${id}`;
       } else {
